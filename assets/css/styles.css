@@ -239,6 +239,19 @@ img {
     gap: 10px;
 }
 
+.divider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+}
+
+.divider img {
+    max-width: 20%;
+    height: auto;
+}
+
 .team-name {
     font-weight: bold;
     font-size: 18px;
@@ -420,4 +433,16 @@ img {
 #rock-btn:focus, #papper-btn:focus, #scissors-btn:focus {
     outline: none;
     box-shadow: 0 0 8px rgba(255, 56, 92, 0.6);
+}
+
+
+.party-remaining {
+    font-size: 1.4rem;
+    color: white;
+    font-weight: 600;
+    width: 100%;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
