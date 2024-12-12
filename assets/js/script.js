@@ -36,6 +36,15 @@ let winFinalTitleSpan = document.querySelector(".final-win-overlay span")
 let winFinalTextP = document.querySelector(".final-win-overlay p")
 let restartParty = document.querySelector("#restart-party");
 
+//Var Misc
+let totalVictorySpan = document.querySelector(".total-victory");
+let ennemieVictorySpan = document.querySelector(".ennemie-total-victory");
+
+let totalVictory = 0;
+let ennemieVictory = 0;
+
+let PartyRemainingSpan = document.querySelector("#party-remaining");
+let PartyRemaining = 10;
 
 // Random function to generate number for the bot
 function getRandomInt(max) {
@@ -105,7 +114,6 @@ function submitBtn(event) {
 function games() {
     const choices = ["Pierre", "Papier", "Ciseaux"];
     const computerChoice = getRandomInt(3);
-
     if (userChoice === computerChoice) {
         winTitle = "EQUALITY!";
     } else if (
@@ -115,33 +123,46 @@ function games() {
     ) {
         mainScore += 1;
         mainScoreText.textContent = mainScore;
+
+        totalVictory += 1;
+        totalVictorySpan.textContent = `Total de victoire: ${totalVictory}`;
+
         winTitle = "YOU WIN!";
     } else {
         ennemieScore += 1;
         ennemieScoreText.textContent = ennemieScore;
+
+        ennemieVictory += 1;
+        ennemieVictorySpan.textContent = `Total de victoire: ${ennemieVictory}`;
         winTitle = "YOU LOOSE...";
     }
-
-    if (mainScore >= 10 || ennemieScore >= 10) {
+    
+    if (PartyRemaining === 1) {
         displayFinalWin.style.display = "flex";
-        if (ennemieScore  >= 10) {
+
+        if (ennemieScore === mainScore) {
+            winFinalTitleSpan.textContent = "ÉGALITÉ..."
+            winFinalTextP.textContent = `Vous: ${mainScore} | Peterbot: ${ennemieScore}`
+        }
+        else if (ennemieScore >= mainScore) {
             winFinalTitleSpan.textContent = "VOUS AVEZ PERDU..."
             winFinalTextP.textContent = `Vous: ${mainScore} | Peterbot: ${ennemieScore}`
         }
-        if (mainScore >= 10) {
+        else {
             winFinalTitleSpan.textContent = "VOUS AVEZ GAGNER!"
             winFinalTextP.textContent = `Vous: ${mainScore} | Peterbot: ${ennemieScore}`
         }
         return false;
     }
     else {
-    winTitleSpan.textContent = winTitle;
-    winTextP.textContent = `Vous : ${choices[userChoice]} | Ordinateur : ${choices[computerChoice]}`;
-    displayWin.style.display = "flex";
-
-    setTimeout(() => {
-        displayWin.style.display = "none";
-    }, 1500);
+        PartyRemaining -= 1;
+        PartyRemainingSpan.textContent = `Parties restantes: ${PartyRemaining}`
+        winTitleSpan.textContent = winTitle;
+        winTextP.textContent = `Vous : ${choices[userChoice]} | Ordinateur : ${choices[computerChoice]}`;
+        displayWin.style.display = "flex";
+        setTimeout(() => {
+            displayWin.style.display = "none";
+        }, 200);
 }
 }
 
@@ -190,6 +211,8 @@ btnScissors.addEventListener("click", function() {
 
 // Restart party
 restartParty.addEventListener("click", function() {
+    PartyRemaining = 10;
+    PartyRemainingSpan.textContent = `Parties restantes: ${PartyRemaining}`
     mainScore = 0;
     ennemieScore = 0;
     mainScoreText.textContent = mainScore;
