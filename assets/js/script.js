@@ -182,6 +182,6 @@ function games() {
 
         setTimeout(() => {
             displayWin.style.display = "none";
-        }, 2000);
+        }, 1500);
     }
 }
