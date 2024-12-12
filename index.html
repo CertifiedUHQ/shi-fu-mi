@@ -72,10 +72,10 @@
                     <h3>Règles du Shi-Fu-Mi</h3>
                 <div class="rules-text">
                     <ul>
-                        <li>1. Chaque joueur choisit l'un des trois éléments : pierre, papier ou ciseaux.</li>
+                        <li>1. Chaque joueur choisit l'un des trois éléments : pierre, feuille ou ciseaux.</li>
                         <li>2. La pierre écrase les ciseaux</li>
-                        <li>3. Les ciseaux coupent le papier</li>
-                        <li>4. Le papier enveloppe la pierre.</li>
+                        <li>3. Les ciseaux coupent le feuille</li>
+                        <li>4. Le feuille enveloppe la pierre.</li>
                         <li>5. En cas d'égalité (les deux joueurs choisissent le même élément), aucun point n'est attribué.</li>
                         <li>6. Si un joueur gagne une manche, il gagne 1 point.</li>
                         <li>7. Le premier joueur à atteindre 10 points remporte la partie.</li>
@@ -93,6 +93,8 @@
                     <span class="team-name">Vous</span>
                         <img id="main-avatar2" src="./assets/img/avatar1.png" alt="Votre avatar">
                         <span class="main-score">0</span>
+                        <span class="total-victory">Total de victoire: 0</span>
+
                 </div>
                 <div class="divider">
                     <img src="./assets/img/vs.png" alt="">
@@ -101,6 +103,7 @@
                     <span class="team-name">Ennemi</span>
                         <img class="ennemie-img" src="./assets/img/peterbot.png" alt="Avatar ennemi">
                         <span class="ennemie-score">0</span>
+                        <span class="ennemie-total-victory">Total de victoire: 0</span>
                 </div>
             </div>
         </div>
@@ -132,7 +135,7 @@
 
             <div class="papper">
                 <div class="img-papper"></div>
-            <button id="papper-btn">Papier</button>
+            <button id="papper-btn">Feuille</button>
             </div>
 
             <div class="scissors">
@@ -140,6 +143,11 @@
             <button id="scissors-btn">Ciseaux</button>
             </div>
         </div>
+
+        <div class="party-remaining">
+            <span id="party-remaining">Parties restantes: 10</span>
+        </div>
+
     </main>
     <!-- End of the main -->
 </body>
