@@ -162,7 +162,7 @@ function games() {
         displayWin.style.display = "flex";
         setTimeout(() => {
             displayWin.style.display = "none";
-        }, 200);
+        }, 1500);
 }
 }
 
