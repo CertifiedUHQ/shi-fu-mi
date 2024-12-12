@@ -13,7 +13,6 @@ let btnCloseRules = document.querySelector("#close-rules")
 
 let errorText = document.querySelector("#error-overlay1");
 
-
 //plays-btn
 let btnRock = document.querySelector("#rock-btn");
 let btnPapper = document.querySelector("#papper-btn")
@@ -38,10 +37,13 @@ let winFinalTextP = document.querySelector(".final-win-overlay p")
 let restartParty = document.querySelector("#restart-party");
 
 
+// Random function to generate number for the bot
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
-  }
+}
 
+
+// Function if avatar is selected
 function IfAvatarSelected(event) {
     avatars.forEach(img => {
         img.style.border = "none";
@@ -51,7 +53,7 @@ function IfAvatarSelected(event) {
     event.target.style.transform = "scale(1.2)";
 }
 
-
+// Function Submit Button
 function submitBtn(event) {
     event.preventDefault();
 
@@ -99,42 +101,94 @@ function submitBtn(event) {
     display.style.display = "none";
 }
 
+// Function run the games SHIFUMI
+function games() {
+    const choices = ["Pierre", "Papier", "Ciseaux"];
+    const computerChoice = getRandomInt(3);
 
+    if (userChoice === computerChoice) {
+        winTitle = "EQUALITY!";
+    } else if (
+        (userChoice === 0 && computerChoice === 2) || // Pierre vs Ciseaux = GAGNER
+        (userChoice === 1 && computerChoice === 0) || // Papier vs Pierre = GAGNER
+        (userChoice === 2 && computerChoice === 1)    // Ciseaux vs Papier = GAGNER
+    ) {
+        mainScore += 1;
+        mainScoreText.textContent = mainScore;
+        winTitle = "YOU WIN!";
+    } else {
+        ennemieScore += 1;
+        ennemieScoreText.textContent = ennemieScore;
+        winTitle = "YOU LOOSE...";
+    }
+
+    if (mainScore >= 10 || ennemieScore >= 10) {
+        displayFinalWin.style.display = "flex";
+        if (ennemieScore  >= 10) {
+            winFinalTitleSpan.textContent = "VOUS AVEZ PERDU..."
+            winFinalTextP.textContent = `Vous: ${mainScore} | Peterbot: ${ennemieScore}`
+        }
+        if (mainScore >= 10) {
+            winFinalTitleSpan.textContent = "VOUS AVEZ GAGNER!"
+            winFinalTextP.textContent = `Vous: ${mainScore} | Peterbot: ${ennemieScore}`
+        }
+        return false;
+    }
+    else {
+    winTitleSpan.textContent = winTitle;
+    winTextP.textContent = `Vous : ${choices[userChoice]} | Ordinateur : ${choices[computerChoice]}`;
+    displayWin.style.display = "flex";
+
+    setTimeout(() => {
+        displayWin.style.display = "none";
+    }, 1500);
+}
+}
+
+// If press enter submit the form
 addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
         submitBtn();
     }
 });
 
+// On click run the function submitBtn
 btnSubit.addEventListener("click", submitBtn);
 
+// On click change css style of the image
 avatars.forEach(img => {
     img.addEventListener("click", IfAvatarSelected);
 });
 
+// Open Rules on click
 btnRules.addEventListener("click", function() {
     displayRules.style.display = "flex";
 });
 
+// Close Rules on click
 btnCloseRules.addEventListener("click", function() {
     displayRules.style.display = "none";
 })
 
+// If user selected papper on click
 btnRock.addEventListener("click", function() {
     userChoice = 0;
     games();
 });
 
+// If user selected papper on click
 btnPapper.addEventListener("click", function() {
     userChoice = 1;
     games();
 });
 
+// If user selected scissors on click
 btnScissors.addEventListener("click", function() {
     userChoice = 2; 
     games();
 });
 
+// Restart party
 restartParty.addEventListener("click", function() {
     mainScore = 0;
     ennemieScore = 0;
@@ -142,46 +196,3 @@ restartParty.addEventListener("click", function() {
     ennemieScoreText.textContent = ennemieScore;
     displayFinalWin.style.display = "none";
 })
-
-function games() {
-        const choices = ["Pierre", "Papier", "Ciseaux"];
-        const computerChoice = getRandomInt(3);
-
-        if (userChoice === computerChoice) {
-            winTitle = "EQUALITY!";
-        } else if (
-            (userChoice === 0 && computerChoice === 2) || // Pierre vs Ciseaux = GAGNER
-            (userChoice === 1 && computerChoice === 0) || // Papier vs Pierre = GAGNER
-            (userChoice === 2 && computerChoice === 1)    // Ciseaux vs Papier = GAGNER
-        ) {
-            mainScore += 1;
-            mainScoreText.textContent = mainScore;
-            winTitle = "YOU WIN!";
-        } else {
-            ennemieScore += 1;
-            ennemieScoreText.textContent = ennemieScore;
-            winTitle = "YOU LOOSE...";
-        }
-
-        if (mainScore >= 10 || ennemieScore >= 10) {
-            displayFinalWin.style.display = "flex";
-            if (ennemieScore  >= 10) {
-                winFinalTitleSpan.textContent = "VOUS AVEZ PERDU..."
-                winFinalTextP.textContent = `Vous: ${mainScore} | Peterbot: ${ennemieScore}`
-            }
-            if (mainScore >= 10) {
-                winFinalTitleSpan.textContent = "VOUS AVEZ GAGNER!"
-                winFinalTextP.textContent = `Vous: ${mainScore} | Peterbot: ${ennemieScore}`
-            }
-            return false;
-        }
-        else {
-        winTitleSpan.textContent = winTitle;
-        winTextP.textContent = `Vous : ${choices[userChoice]} | Ordinateur : ${choices[computerChoice]}`;
-        displayWin.style.display = "flex";
-
-        setTimeout(() => {
-            displayWin.style.display = "none";
-        }, 1500);
-    }
-}
