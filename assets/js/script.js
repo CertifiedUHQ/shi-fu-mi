@@ -146,7 +146,6 @@ restartParty.addEventListener("click", function() {
 function games() {
         const choices = ["Pierre", "Papier", "Ciseaux"];
         const computerChoice = getRandomInt(3);
-        console.log(`Ordinateur : ${choices[computerChoice]}, Utilisateur : ${choices[userChoice]}`);
 
         if (userChoice === computerChoice) {
             winTitle = "EQUALITY!";
