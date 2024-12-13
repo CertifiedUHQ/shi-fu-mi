@@ -125,7 +125,7 @@ function games() {
         mainScoreText.textContent = mainScore;
 
         totalVictory += 1;
-        totalVictorySpan.textContent = `Total de victoire: ${totalVictory}`;
+        totalVictorySpan.textContent = `Total de victoires: ${totalVictory}`;
 
         winTitle = "YOU WIN!";
     } else {
@@ -133,7 +133,7 @@ function games() {
         ennemieScoreText.textContent = ennemieScore;
 
         ennemieVictory += 1;
-        ennemieVictorySpan.textContent = `Total de victoire: ${ennemieVictory}`;
+        ennemieVictorySpan.textContent = `Total de victoires: ${ennemieVictory}`;
         winTitle = "YOU LOOSE...";
     }
     
