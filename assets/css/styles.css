@@ -238,7 +238,7 @@ img {
     width: 50%;
 }
 
-.ennemie-total-victory {
+.ennemie-total-victory, .total-victory {
     font-size: 1.2rem;
     font-weight: 600;
 }
